@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Star Chart">
+<title>⭐ Star Chart</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#F7F3EE 0%,#EBE4FF 100%);min-height:100vh;}
+
+/* Header */
+.header{background:#fff;border-bottom:2px solid #EBE4FF;padding:14px 16px 10px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.header-title{font-size:19px;font-weight:900;color:#3A2F6E;}
+.header-sub{font-size:11px;color:#9B8EC4;font-weight:600;margin-top:1px;}
+.btn-manage{background:#EBE4FF;color:#3A2F6E;border:none;border-radius:10px;padding:7px 13px;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;}
+.btn-manage.active{background:#3A2F6E;color:#fff;}
+
+/* Child tabs */
+.child-tabs{padding:10px 14px 0;display:flex;gap:7px;overflow-x:auto;}
+.child-tab{background:#fff;color:#3A2F6E;border:2px solid #EBE4FF;border-radius:18px;padding:5px 14px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.child-tab.active{background:#3A2F6E;color:#fff;border-color:#3A2F6E;}
+
+/* Score card */
+.score-card{background:#fff;border-radius:20px;padding:16px 18px;margin:12px 14px 6px;box-shadow:0 4px 20px rgba(58,47,110,0.10);border:2px solid #EBE4FF;}
+.score-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.child-name{font-weight:900;font-size:24px;color:#3A2F6E;letter-spacing:-0.5px;}
+.level-badge{display:inline-block;border-radius:7px;padding:2px 9px;font-weight:800;font-size:12px;margin-top:5px;}
+.score-num{font-weight:900;font-size:38px;color:#3A2F6E;letter-spacing:-2px;line-height:1;text-align:right;}
+.score-label{font-size:12px;color:#9B8EC4;font-weight:700;text-align:right;}
+.progress-bar-wrap{margin-top:12px;}
+.progress-info{display:flex;justify-content:space-between;margin-bottom:5px;font-size:11px;font-weight:700;color:#9B8EC4;}
+.progress-track{background:#EBE4FF;border-radius:99px;height:9px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:99px;transition:width 0.5s ease;}
+
+/* Main nav tabs */
+.nav-wrap{padding:8px 14px;}
+.nav-toggle{background:#EBE4FF;border-radius:14px;padding:3px;display:flex;gap:3px;}
+.nav-btn{flex:1;background:transparent;color:#9B8EC4;border:none;border-radius:11px;padding:9px 0;font-family:inherit;font-weight:800;font-size:12px;cursor:pointer;transition:all 0.15s;}
+.nav-btn.active{background:#fff;color:#3A2F6E;box-shadow:0 2px 8px rgba(58,47,110,0.10);}
+
+/* Behavior buttons */
+.behaviors{padding:0 14px;}
+.behavior-btn{width:100%;display:flex;align-items:center;background:#fff;border-radius:16px;padding:12px 14px;margin-bottom:9px;gap:12px;text-align:left;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;border:2px solid #D4F0E0;font-family:inherit;transition:transform 0.1s;}
+.behavior-btn:active{transform:scale(0.97);}
+.behavior-btn.bad{border-color:#FFE4E4;}
+.b-emoji{font-size:26px;flex-shrink:0;}
+.b-label{flex:1;font-weight:800;font-size:14px;color:#3A2F6E;}
+.b-pts{background:#D4F0E0;color:#2E8A55;border-radius:9px;padding:4px 10px;font-weight:900;font-size:14px;min-width:48px;text-align:center;flex-shrink:0;}
+.b-pts.bad{background:#FFE4E4;color:#D94F4F;}
+
+/* Log */
+.log-section{padding:8px 14px 24px;}
+.log-toggle-btn{width:100%;background:#fff;border:2px solid #EBE4FF;border-radius:14px;padding:11px;font-family:inherit;font-weight:700;font-size:13px;color:#9B8EC4;cursor:pointer;}
+.log-entry{background:#fff;border-radius:12px;padding:10px 14px;margin-top:7px;display:flex;justify-content:space-between;align-items:center;border:1.5px solid #EBE4FF;}
+.log-entry-label{font-weight:700;font-size:13px;color:#3A2F6E;}
+.log-entry-ts{font-size:11px;color:#9B8EC4;margin-top:1px;}
+.log-entry-pts{font-weight:900;font-size:14px;}
+.log-empty{color:#9B8EC4;text-align:center;padding:18px;font-size:13px;font-weight:600;}
+
+/* Calendar */
+.cal-section{padding:0 14px 24px;}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.cal-month{font-weight:900;font-size:17px;color:#3A2F6E;}
+.cal-nav-btn{background:#EBE4FF;color:#3A2F6E;border:none;border-radius:9px;padding:6px 14px;font-family:inherit;font-weight:800;font-size:16px;cursor:pointer;}
+.cal-grid{background:#fff;border-radius:16px;padding:12px;box-shadow:0 2px 10px rgba(58,47,110,0.08);border:2px solid #EBE4FF;}
+.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:4px;}
+.cal-dow-cell{text-align:center;font-size:11px;font-weight:800;color:#9B8EC4;padding:4px 0;}
+.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+.cal-day{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;}
+.cal-day.empty{background:transparent;cursor:default;}
+.cal-day.today{outline:2px solid #3A2F6E;outline-offset:-2px;}
+.cal-day-num{font-size:13px;font-weight:800;color:#3A2F6E;}
+.cal-day.empty .cal-day-num{color:transparent;}
+.cal-day-pts{font-size:9px;font-weight:800;margin-top:1px;}
+.cal-legend{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap;}
+.cal-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#9B8EC4;}
+.cal-legend-dot{width:12px;height:12px;border-radius:4px;}
+.cal-selected-day{margin-top:12px;background:#F7F3EE;border-radius:14px;padding:12px 14px;}
+.cal-selected-title{font-weight:800;font-size:14px;color:#3A2F6E;margin-bottom:8px;}
+.cal-selected-entry{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #EBE4FF;}
+.cal-selected-entry:last-child{border-bottom:none;}
+.cal-selected-label{font-size:13px;font-weight:700;color:#3A2F6E;}
+.cal-selected-pts{font-size:13px;font-weight:900;}
+.cal-no-activity{font-size:13px;color:#9B8EC4;font-weight:600;text-align:center;padding:8px 0;}
+
+/* Manage view */
+.manage-view{padding:16px;}
+.manage-title{font-weight:800;font-size:17px;color:#3A2F6E;margin-bottom:14px;}
+.manage-card{background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:9px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.manage-name{font-weight:800;font-size:15px;color:#3A2F6E;}
+.manage-sub{font-size:12px;color:#9B8EC4;font-weight:600;margin-top:1px;}
+.btn-remove{background:#FFE4E4;color:#D94F4F;border:none;border-radius:9px;padding:6px 11px;font-family:inherit;font-weight:700;font-size:12px;cursor:pointer;}
+.add-child-card{background:#fff;border-radius:14px;padding:14px;margin-top:16px;box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.add-child-title{font-weight:700;font-size:13px;color:#3A2F6E;margin-bottom:9px;}
+.add-row{display:flex;gap:9px;}
+.add-input{flex:1;border:2px solid #EBE4FF;border-radius:11px;padding:9px 12px;font-family:inherit;font-size:14px;outline:none;color:#3A2F6E;font-weight:600;}
+.btn-add{background:#3A2F6E;color:#fff;border:none;border-radius:11px;padding:9px 16px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;}
+.export-btn{width:100%;background:#EBE4FF;color:#3A2F6E;border:none;border-radius:12px;padding:12px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;margin-top:12px;}
+
+/* Toast */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);color:#fff;border-radius:14px;padding:11px 22px;font-family:'Nunito',sans-serif;font-weight:700;font-size:15px;box-shadow:0 4px 20px rgba(0,0,0,0.18);z-index:9999;animation:fadeIn 0.2s ease;white-space:nowrap;}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-50%) translateY(-8px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const BEHAVIORS={
+  good:[
+    {id:"teeth",   label:"Brushed teeth",       emoji:"🦷", points:5 },
+    {id:"reading", label:"Reading time",         emoji:"📚", points:10},
+    {id:"quiet",   label:"Quiet time",           emoji:"🤫", points:5 },
+    {id:"outside", label:"Played outside",       emoji:"🌳", points:10},
+    {id:"homework",label:"Finished homework",    emoji:"✏️", points:15},
+    {id:"chores",  label:"Did chores",           emoji:"🧹", points:10},
+    {id:"kind",    label:"Was kind to others",   emoji:"💛", points:10},
+    {id:"bedtime", label:"Went to bed on time",  emoji:"😴", points:10},
+  ],
+  bad:[
+    {id:"tantrum", label:"Threw a tantrum",       emoji:"😤", points:-10},
+    {id:"disresp", label:"Was disrespectful",     emoji:"🙄", points:-10},
+    {id:"lying",   label:"Was not honest",        emoji:"🤥", points:-15},
+    {id:"fighting",label:"Hit or pushed someone", emoji:"👊", points:-20},
+    {id:"ignored", label:"Ignored instructions",  emoji:"🙉", points:-5 },
+    {id:"screen",  label:"Too much screen time",  emoji:"📱", points:-5 },
+  ]
+};
+const LEVELS=[
+  {min:0,   label:"Seedling", emoji:"🌱", color:"#6DBF8F"},
+  {min:50,  label:"Explorer", emoji:"🌟", color:"#F4BE5E"},
+  {min:150, label:"Champion", emoji:"🏆", color:"#E07B5A"},
+  {min:300, label:"Legend",   emoji:"👑", color:"#9B7FD4"},
+];
+const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+function getLevel(p){return[...LEVELS].reverse().find(l=>p>=l.min)||LEVELS[0];}
+function getNextLevel(p){return LEVELS.find(l=>l.min>p);}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function stars(n){n=Math.max(0,Math.min(5,n));return"⭐".repeat(n)+"☆".repeat(5-n);}
+function dateKey(ts){const d=new Date(ts);return`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;}
+function todayKey(){const d=new Date();return`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;}
+
+// Default state with Margot
+let state={
+  children:[{id:1,name:"Margot",points:0,log:[]}],
+  activeChild:1,
+  view:"home",
+  tab:"good",
+  navTab:"earn",  // earn | log | calendar
+  showLog:false,
+  newName:"",
+  calYear:new Date().getFullYear(),
+  calMonth:new Date().getMonth(),
+  calSelected:null
+};
+
+// Load saved data
+try{
+  const s=localStorage.getItem("sc3");
+  if(s){
+    const p=JSON.parse(s);
+    state.children=p.children;
+    state.activeChild=p.activeChild;
+  }
+}catch(e){}
+function save(){try{localStorage.setItem("sc3",JSON.stringify({children:state.children,activeChild:state.activeChild}));}catch(e){}}
+
+function render(){
+  const app=document.getElementById("app");
+  const child=state.children.find(c=>c.id===state.activeChild);
+  let h="";
+
+  // Header
+  h+=`<div class="header"><div><div class="header-title">⭐ Star Chart</div><div class="header-sub">Good behavior tracker</div></div><button class="btn-manage ${state.view==="manage"?"active":""}" onclick="toggleManage()">${state.view==="manage"?"← Done":"⚙ Kids"}</button></div>`;
+
+  if(state.view==="manage"){
+    h+=`<div class="manage-view"><div class="manage-title">Manage Kids</div>`;
+    state.children.forEach(c=>{
+      const lv=getLevel(c.points);
+      h+=`<div class="manage-card"><div><div class="manage-name">${esc(c.name)}</div><div class="manage-sub">${c.points} pts · ${lv.emoji} ${lv.label}</div></div>${state.children.length>1?`<button class="btn-remove" onclick="removeChild(${c.id})">Remove</button>`:""}</div>`;
+    });
+    h+=`<div class="add-child-card"><div class="add-child-title">Add a child</div><div class="add-row"><input class="add-input" id="nin" type="text" placeholder="Child's name" value="${esc(state.newName)}" oninput="state.newName=this.value" onkeydown="if(event.key==='Enter')addChild()"><button class="btn-add" onclick="addChild()">Add</button></div></div>`;
+    h+=`<button class="export-btn" onclick="exportData()">📤 Export data as text</button>`;
+    h+=`</div>`;
+
+  } else if(child){
+    // Child selector tabs
+    if(state.children.length>1){
+      h+=`<div class="child-tabs">`;
+      state.children.forEach(c=>{h+=`<button class="child-tab ${c.id===state.activeChild?"active":""}" onclick="setChild(${c.id})">${esc(c.name)}</button>`;});
+      h+=`</div>`;
+    }
+
+    // Score card
+    const lv=getLevel(child.points);
+    const nx=getNextLevel(child.points);
+    const pct=nx?((child.points-lv.min)/(nx.min-lv.min))*100:100;
+    const plabel=nx?`${child.points-lv.min}/${nx.min-lv.min} to ${nx.emoji} ${nx.label}`:"Max level! 👑";
+    h+=`<div class="score-card"><div class="score-top"><div><div class="child-name">${esc(child.name)}</div><div class="level-badge" style="background:${lv.color}22;color:${lv.color}">${lv.emoji} ${lv.label}</div></div><div><div class="score-num">${child.points}</div><div class="score-label">points</div></div></div><div class="progress-bar-wrap"><div class="progress-info"><span>${plabel}</span><span>${stars(Math.round(pct/20))}</span></div><div class="progress-track"><div class="progress-fill" style="width:${Math.min(100,pct)}%;background:${lv.color}"></div></div></div></div>`;
+
+    // Nav tabs (3 tabs now)
+    h+=`<div class="nav-wrap"><div class="nav-toggle">
+      <button class="nav-btn ${state.navTab==="earn"?"active":""}" onclick="setNavTab('earn')">🌟 Award</button>
+      <button class="nav-btn ${state.navTab==="log"?"active":""}" onclick="setNavTab('log')">📋 History</button>
+      <button class="nav-btn ${state.navTab==="calendar"?"active":""}" onclick="setNavTab('calendar')">📅 Calendar</button>
+    </div></div>`;
+
+    // EARN tab
+    if(state.navTab==="earn"){
+      // Sub-toggle good/bad
+      h+=`<div style="padding:0 14px 10px;"><div class="nav-toggle"><button class="nav-btn ${state.tab==="good"?"active":""}" onclick="setTab('good')">✅ Earn Points</button><button class="nav-btn ${state.tab==="bad"?"active":""}" onclick="setTab('bad')">❌ Remove Points</button></div></div>`;
+      h+=`<div class="behaviors">`;
+      BEHAVIORS[state.tab].forEach(b=>{
+        const bad=b.points<0;
+        h+=`<button class="behavior-btn ${bad?"bad":""}" onclick="award(${b.points},'${esc(b.emoji)} ${esc(b.label)}')"><span class="b-emoji">${b.emoji}</span><span class="b-label">${b.label}</span><span class="b-pts ${bad?"bad":""}">${b.points>0?"+":""}${b.points}</span></button>`;
+      });
+      h+=`</div>`;
+    }
+
+    // HISTORY tab
+    if(state.navTab==="log"){
+      h+=`<div class="log-section">`;
+      if(!child.log.length){
+        h+=`<div class="log-empty">No events yet. Start tracking!</div>`;
+      } else {
+        child.log.forEach(e=>{
+          const col=e.points>0?"#2E8A55":"#D94F4F";
+          h+=`<div class="log-entry"><div><div class="log-entry-label">${esc(e.label)}</div><div class="log-entry-ts">${esc(e.ts)}</div></div><div class="log-entry-pts" style="color:${col}">${e.points>0?"+":""}${e.points}</div></div>`;
+        });
+      }
+      h+=`</div>`;
+    }
+
+    // CALENDAR tab
+    if(state.navTab==="calendar"){
+      h+=renderCalendar(child);
+    }
+  }
+
+  app.innerHTML=h;
+}
+
+function renderCalendar(child){
+  const year=state.calYear, month=state.calMonth;
+  const firstDay=new Date(year,month,1).getDay();
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  const today=new Date();
+
+  // Build day→points map from log
+  const dayMap={};
+  child.log.forEach(e=>{
+    const d=new Date(e.ts);
+    if(d.getFullYear()===year&&d.getMonth()===month){
+      const k=d.getDate();
+      dayMap[k]=(dayMap[k]||0)+e.points;
+    }
+  });
+
+  // Day→entries map for detail view
+  const dayEntries={};
+  child.log.forEach(e=>{
+    const d=new Date(e.ts);
+    if(d.getFullYear()===year&&d.getMonth()===month){
+      const k=d.getDate();
+      if(!dayEntries[k])dayEntries[k]=[];
+      dayEntries[k].push(e);
+    }
+  });
+
+  function dayColor(pts){
+    if(pts===undefined)return"#F7F3EE";
+    if(pts>20)return"#6DBF8F";
+    if(pts>0)return"#B8E8CC";
+    if(pts===0)return"#F7F3EE";
+    return"#FFD0C8";
+  }
+  function dayTextColor(pts){
+    if(pts===undefined)return"#3A2F6E";
+    if(pts>0)return"#1A6B3A";
+    if(pts<0)return"#B03020";
+    return"#3A2F6E";
+  }
+
+  let h=`<div class="cal-section">`;
+  h+=`<div class="cal-header">
+    <button class="cal-nav-btn" onclick="calPrev()">‹</button>
+    <span class="cal-month">${MONTHS[month]} ${year}</span>
+    <button class="cal-nav-btn" onclick="calNext()">›</button>
+  </div>`;
+
+  h+=`<div class="cal-grid">`;
+  // Day of week headers
+  h+=`<div class="cal-dow">`;
+  DAYS.forEach(d=>{h+=`<div class="cal-dow-cell">${d}</div>`;});
+  h+=`</div>`;
+
+  // Days grid
+  h+=`<div class="cal-days">`;
+  for(let i=0;i<firstDay;i++){
+    h+=`<div class="cal-day empty"><span class="cal-day-num">.</span></div>`;
+  }
+  for(let d=1;d<=daysInMonth;d++){
+    const pts=dayMap[d];
+    const isToday=today.getFullYear()===year&&today.getMonth()===month&&today.getDate()===d;
+    const isSelected=state.calSelected===d;
+    const bg=isSelected?"#3A2F6E":dayColor(pts);
+    const numColor=isSelected?"#fff":dayTextColor(pts);
+    const ptsColor=isSelected?"#EBE4FF":(pts>0?"#2E8A55":pts<0?"#D94F4F":"transparent");
+    h+=`<div class="cal-day ${isToday?"today":""}" style="background:${bg}" onclick="selectDay(${d})">
+      <span class="cal-day-num" style="color:${numColor}">${d}</span>
+      ${pts!==undefined?`<span class="cal-day-pts" style="color:${ptsColor}">${pts>0?"+":""}${pts}</span>`:""}
+    </div>`;
+  }
+  h+=`</div>`;
+
+  // Legend
+  h+=`<div class="cal-legend">
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#6DBF8F"></div>Great day (20+)</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#B8E8CC"></div>Good day</div>
+    <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#FFD0C8"></div>Points removed</div>
+  </div>`;
+  h+=`</div>`; // end cal-grid
+
+  // Selected day detail
+  if(state.calSelected){
+    const sel=state.calSelected;
+    const entries=dayEntries[sel]||[];
+    const selDate=new Date(year,month,sel);
+    const dateStr=selDate.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
+    h+=`<div class="cal-selected-day">
+      <div class="cal-selected-title">${dateStr}</div>`;
+    if(!entries.length){
+      h+=`<div class="cal-no-activity">No activity recorded</div>`;
+    } else {
+      entries.forEach(e=>{
+        const col=e.points>0?"#2E8A55":"#D94F4F";
+        h+=`<div class="cal-selected-entry">
+          <span class="cal-selected-label">${esc(e.label)}</span>
+          <span class="cal-selected-pts" style="color:${col}">${e.points>0?"+":""}${e.points}</span>
+        </div>`;
+      });
+      const total=(dayMap[sel]||0);
+      const totalCol=total>=0?"#2E8A55":"#D94F4F";
+      h+=`<div style="margin-top:8px;padding-top:8px;border-top:2px solid #EBE4FF;display:flex;justify-content:space-between;font-weight:900;font-size:14px;">
+        <span style="color:#3A2F6E">Total</span>
+        <span style="color:${totalCol}">${total>0?"+":""}${total}</span>
+      </div>`;
+    }
+    h+=`</div>`;
+  }
+  h+=`</div>`;
+  return h;
+}
+
+// --- Actions ---
+function showToast(msg,type){const ex=document.querySelector(".toast");if(ex)ex.remove();const t=document.createElement("div");t.className="toast";t.style.background=type==="good"?"#6DBF8F":"#E07B5A";t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2200);}
+function toggleManage(){state.view=state.view==="manage"?"home":"manage";render();}
+function setChild(id){state.activeChild=id;state.calSelected=null;render();}
+function setTab(t){state.tab=t;render();}
+function setNavTab(t){state.navTab=t;state.calSelected=null;render();}
+function toggleLog(){state.showLog=!state.showLog;render();}
+function calPrev(){state.calMonth--;if(state.calMonth<0){state.calMonth=11;state.calYear--;}state.calSelected=null;render();}
+function calNext(){state.calMonth++;if(state.calMonth>11){state.calMonth=0;state.calYear++;}state.calSelected=null;render();}
+function selectDay(d){state.calSelected=state.calSelected===d?null:d;render();}
+
+function award(pts,label){
+  state.children=state.children.map(c=>{
+    if(c.id!==state.activeChild)return c;
+    return{...c,points:Math.max(0,c.points+pts),log:[{label,points:pts,ts:new Date().toLocaleString()},...c.log.slice(0,199)]};
+  });
+  save();
+  showToast(pts>0?`+${pts} pts — Great job! 🎉`:`${pts} pts`,pts>0?"good":"bad");
+  render();
+}
+
+function addChild(){
+  const name=state.newName.trim();
+  if(!name)return;
+  const id=Date.now();
+  state.children=[...state.children,{id,name,points:0,log:[]}];
+  state.activeChild=id;
+  state.newName="";
+  state.view="home";
+  save();render();
+}
+
+function removeChild(id){
+  if(!confirm("Remove this child and all their data?"))return;
+  state.children=state.children.filter(c=>c.id!==id);
+  if(state.activeChild===id)state.activeChild=state.children[0]?.id||null;
+  save();render();
+}
+
+function exportData(){
+  let out="⭐ STAR CHART EXPORT\n";
+  out+=`Exported: ${new Date().toLocaleString()}\n\n`;
+  state.children.forEach(c=>{
+    out+=`═══════════════════\n${c.name} — ${c.points} pts (${getLevel(c.points).label})\n═══════════════════\n`;
+    if(!c.log.length){out+="No events recorded.\n";}
+    else{c.log.forEach(e=>{out+=`${e.ts}  ${e.label}  ${e.points>0?"+":""}${e.points}\n`;});}
+    out+="\n";
+  });
+  const blob=new Blob([out],{type:"text/plain"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download="StarChart-Export.txt";
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+
+render();
+</script>
+</body>
+</html>
