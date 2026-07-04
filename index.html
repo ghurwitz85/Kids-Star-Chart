@@ -24,7 +24,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#F7F3EE 0
 .child-tab-avatar{width:22px;height:22px;border-radius:50%;object-fit:cover;flex-shrink:0;}
 .child-tab-initials{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;flex-shrink:0;}
 
-.score-card{border-radius:20px;padding:16px 18px;margin:12px 14px 6px;box-shadow:0 4px 20px rgba(58,47,110,0.10);border:2px solid #EBE4FF;}
+.score-card{border-radius:20px;padding:16px 18px;margin:12px 14px 6px;box-shadow:0 4px 20px rgba(58,47,110,0.10);border:2px solid #EBE4FF;background:#fff;}
 .score-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
 .score-left{display:flex;align-items:center;gap:12px;}
 .avatar-large{width:58px;height:58px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.12);flex-shrink:0;}
@@ -33,6 +33,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#F7F3EE 0
 .level-badge{display:inline-block;border-radius:7px;padding:2px 9px;font-weight:800;font-size:12px;margin-top:5px;}
 .score-num{font-weight:900;font-size:38px;color:#3A2F6E;letter-spacing:-2px;line-height:1;text-align:right;}
 .score-label{font-size:12px;color:#9B8EC4;font-weight:700;text-align:right;}
+.score-allowance{font-size:13px;color:#6DBF8F;font-weight:800;text-align:right;margin-top:2px;}
 .progress-bar-wrap{margin-top:12px;}
 .progress-info{display:flex;justify-content:space-between;margin-bottom:5px;font-size:11px;font-weight:700;color:#9B8EC4;}
 .progress-track{border-radius:99px;height:9px;overflow:hidden;background:#EBE4FF;}
@@ -40,7 +41,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#F7F3EE 0
 
 .nav-wrap{padding:8px 14px;}
 .nav-toggle{background:#EBE4FF;border-radius:14px;padding:3px;display:flex;gap:3px;}
-.nav-btn{flex:1;background:transparent;color:#9B8EC4;border:none;border-radius:11px;padding:9px 0;font-family:inherit;font-weight:800;font-size:12px;cursor:pointer;transition:all 0.15s;}
+.nav-btn{flex:1;background:transparent;color:#9B8EC4;border:none;border-radius:11px;padding:9px 0;font-family:inherit;font-weight:800;font-size:11px;cursor:pointer;transition:all 0.15s;}
 .nav-btn.active{background:#fff;color:#3A2F6E;box-shadow:0 2px 8px rgba(58,47,110,0.10);}
 
 .sub-toggle{padding:0 14px 10px;}
@@ -53,13 +54,42 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#F7F3EE 0
 .b-pts{background:#D4F0E0;color:#2E8A55;border-radius:9px;padding:4px 10px;font-weight:900;font-size:14px;min-width:48px;text-align:center;flex-shrink:0;}
 .b-pts.bad{background:#FFE4E4;color:#D94F4F;}
 
+/* History */
 .log-section{padding:8px 14px 24px;}
-.log-entry{background:#fff;border-radius:12px;padding:10px 14px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;border:1.5px solid #EBE4FF;}
+.log-entry{background:#fff;border-radius:12px;padding:10px 14px;margin-bottom:7px;display:flex;justify-content:space-between;align-items:center;border:1.5px solid #EBE4FF;gap:8px;}
 .log-entry-label{font-weight:700;font-size:13px;color:#3A2F6E;}
 .log-entry-ts{font-size:11px;color:#9B8EC4;margin-top:1px;}
 .log-entry-pts{font-weight:900;font-size:14px;flex-shrink:0;}
+.log-entry-payout{background:#FFF8E8;border:1.5px solid #F4BE5E;border-radius:12px;padding:10px 14px;margin-bottom:7px;}
+.log-entry-payout-title{font-weight:800;font-size:13px;color:#B8860B;}
+.log-entry-payout-sub{font-size:11px;color:#9B8EC4;margin-top:2px;}
+.btn-undo{background:#FFF0F0;color:#D94F4F;border:none;border-radius:8px;padding:5px 10px;font-family:inherit;font-weight:800;font-size:12px;cursor:pointer;flex-shrink:0;}
 .log-empty{color:#9B8EC4;text-align:center;padding:18px;font-size:13px;font-weight:600;}
 
+/* Allowance tab */
+.allowance-section{padding:0 14px 24px;}
+.allowance-card{background:#fff;border-radius:20px;padding:18px;margin-bottom:12px;box-shadow:0 4px 20px rgba(58,47,110,0.10);border:2px solid #EBE4FF;}
+.allowance-title{font-weight:900;font-size:16px;color:#3A2F6E;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.allowance-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #F0ECFA;}
+.allowance-row:last-child{border-bottom:none;}
+.allowance-row-label{font-weight:700;font-size:14px;color:#6B5FA0;}
+.allowance-row-value{font-weight:900;font-size:16px;color:#3A2F6E;}
+.allowance-row-value.green{color:#2E8A55;}
+.payout-btn{width:100%;background:linear-gradient(135deg,#6DBF8F,#4AAA75);color:#fff;border:none;border-radius:16px;padding:16px;font-family:inherit;font-weight:900;font-size:17px;cursor:pointer;box-shadow:0 4px 14px rgba(109,191,143,0.35);margin-top:4px;transition:transform 0.1s;}
+.payout-btn:active{transform:scale(0.98);}
+.payout-btn:disabled{background:#C8E6D4;box-shadow:none;cursor:default;}
+.friday-note{background:#FFF8E8;border:1.5px solid #F4BE5E;border-radius:14px;padding:12px 14px;margin-bottom:12px;font-size:13px;font-weight:700;color:#9A7010;display:flex;align-items:center;gap:8px;}
+.payout-history-title{font-weight:900;font-size:15px;color:#3A2F6E;margin-bottom:10px;}
+.payout-record{background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;border:1.5px solid #EBE4FF;}
+.payout-record-date{font-weight:800;font-size:13px;color:#3A2F6E;}
+.payout-record-detail{font-size:12px;color:#9B8EC4;font-weight:600;margin-top:2px;}
+.payout-record-amount{font-weight:900;font-size:18px;color:#2E8A55;}
+.payout-total-card{background:linear-gradient(135deg,#3A2F6E,#6B5FA0);border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;}
+.payout-total-label{font-weight:800;font-size:13px;color:rgba(255,255,255,0.75);}
+.payout-total-value{font-weight:900;font-size:22px;color:#fff;}
+.rate-note{font-size:12px;color:#9B8EC4;font-weight:700;text-align:center;margin-top:6px;}
+
+/* Calendar */
 .cal-section{padding:0 14px 24px;}
 .cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
 .cal-month{font-weight:900;font-size:17px;color:#3A2F6E;}
@@ -68,20 +98,22 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#F7F3EE 0
 .cal-dow{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:4px;}
 .cal-dow-cell{text-align:center;font-size:11px;font-weight:800;color:#9B8EC4;padding:4px 0;}
 .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
-.cal-day{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;}
+.cal-day{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;}
 .cal-day.empty{background:transparent;cursor:default;}
 .cal-day.today{outline:2px solid #3A2F6E;outline-offset:-2px;}
+.cal-day.payout-day::after{content:"💰";position:absolute;top:1px;right:1px;font-size:8px;}
 .cal-day-num{font-size:13px;font-weight:800;color:#3A2F6E;}
 .cal-day-pts{font-size:9px;font-weight:800;margin-top:1px;}
-.cal-legend{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap;}
-.cal-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#9B8EC4;}
-.cal-legend-dot{width:12px;height:12px;border-radius:4px;}
+.cal-legend{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;}
+.cal-legend-item{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#9B8EC4;}
+.cal-legend-dot{width:12px;height:12px;border-radius:4px;flex-shrink:0;}
 .cal-selected-day{margin-top:12px;background:#F7F3EE;border-radius:14px;padding:12px 14px;}
 .cal-selected-title{font-weight:800;font-size:14px;color:#3A2F6E;margin-bottom:8px;}
 .cal-selected-entry{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #EBE4FF;}
 .cal-selected-entry:last-child{border-bottom:none;}
 .cal-no-activity{font-size:13px;color:#9B8EC4;font-weight:600;text-align:center;padding:8px 0;}
 
+/* Manage */
 .manage-view{padding:16px;}
 .manage-title{font-weight:800;font-size:17px;color:#3A2F6E;margin-bottom:14px;}
 .manage-card{background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:9px;box-shadow:0 2px 8px rgba(0,0,0,0.07);}
@@ -95,7 +127,7 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#F7F3EE 0
 .btn-remove{background:#FFE4E4;color:#D94F4F;border:none;border-radius:9px;padding:6px 11px;font-family:inherit;font-weight:700;font-size:12px;cursor:pointer;}
 .btn-edit{background:#EBE4FF;color:#3A2F6E;border:none;border-radius:9px;padding:6px 11px;font-family:inherit;font-weight:700;font-size:12px;cursor:pointer;}
 .manage-card-edit{margin-top:12px;padding-top:12px;border-top:1px solid #EBE4FF;}
-.edit-label{font-size:12px;font-weight:700;color:#9B8EC4;margin-bottom:6px;}
+.edit-label{font-size:12px;font-weight:700;color:#9B8EC4;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
 .color-swatches{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
 .color-swatch{width:30px;height:30px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:transform 0.1s;}
 .color-swatch.selected{border-color:#3A2F6E;transform:scale(1.15);}
@@ -103,7 +135,9 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#F7F3EE 0
 .photo-preview{display:flex;align-items:center;gap:10px;margin-top:8px;}
 .photo-preview img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #EBE4FF;}
 .btn-remove-photo{background:#FFE4E4;color:#D94F4F;border:none;border-radius:8px;padding:5px 10px;font-family:inherit;font-weight:700;font-size:12px;cursor:pointer;}
-
+.rate-card{background:#F7F3EE;border-radius:12px;padding:12px 14px;margin-top:12px;}
+.rate-row{display:flex;align-items:center;gap:10px;}
+.rate-input{border:2px solid #EBE4FF;border-radius:10px;padding:7px 10px;font-family:inherit;font-size:14px;font-weight:800;color:#3A2F6E;width:80px;outline:none;text-align:center;}
 .add-child-card{background:#fff;border-radius:14px;padding:14px;margin-top:16px;box-shadow:0 2px 8px rgba(0,0,0,0.07);}
 .add-child-title{font-weight:700;font-size:13px;color:#3A2F6E;margin-bottom:9px;}
 .add-row{display:flex;gap:9px;}
@@ -111,44 +145,61 @@ body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,#F7F3EE 0
 .btn-add{background:#3A2F6E;color:#fff;border:none;border-radius:11px;padding:9px 16px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;}
 .export-btn{width:100%;background:#EBE4FF;color:#3A2F6E;border:none;border-radius:12px;padding:12px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;margin-top:12px;}
 
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:200;display:flex;align-items:flex-end;justify-content:center;}
+.modal{background:#fff;border-radius:24px 24px 0 0;padding:24px 20px 36px;width:100%;max-width:430px;}
+.modal-title{font-weight:900;font-size:18px;color:#3A2F6E;margin-bottom:6px;}
+.modal-sub{font-size:14px;color:#9B8EC4;font-weight:600;margin-bottom:20px;}
+.modal-amount{font-weight:900;font-size:42px;color:#2E8A55;text-align:center;margin:16px 0;}
+.modal-detail{font-size:13px;color:#9B8EC4;font-weight:700;text-align:center;margin-bottom:24px;}
+.modal-btn-row{display:flex;gap:10px;}
+.modal-confirm{flex:1;background:#6DBF8F;color:#fff;border:none;border-radius:14px;padding:14px;font-family:inherit;font-weight:900;font-size:16px;cursor:pointer;}
+.modal-cancel{flex:1;background:#F0ECFA;color:#3A2F6E;border:none;border-radius:14px;padding:14px;font-family:inherit;font-weight:800;font-size:16px;cursor:pointer;}
+.modal-pts-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#F7F3EE;border-radius:12px;margin-bottom:8px;}
+.modal-pts-label{font-weight:700;font-size:14px;color:#3A2F6E;}
+.modal-pts-val{font-weight:900;font-size:14px;}
+.edit-modal-input{width:100%;border:2px solid #EBE4FF;border-radius:12px;padding:11px 14px;font-family:inherit;font-size:16px;font-weight:700;color:#3A2F6E;outline:none;margin-bottom:12px;}
+
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);color:#fff;border-radius:14px;padding:11px 22px;font-family:'Nunito',sans-serif;font-weight:700;font-size:15px;box-shadow:0 4px 20px rgba(0,0,0,0.18);z-index:9999;animation:fadeIn 0.2s ease;white-space:nowrap;}
 @keyframes fadeIn{from{opacity:0;transform:translateX(-50%) translateY(-8px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
 </style>
 </head>
 <body>
 <div id="app"></div>
+<div id="modal"></div>
+
 <script>
 const BEHAVIORS={
   good:[
-    {id:"dinner",   label:"Ate prepared dinner",              emoji:"🍽️", points:5 },
-    {id:"healthy",  label:"Ate extra healthy food",           emoji:"🥦", points:5 },
-    {id:"workout",  label:"Did a 30-min workout",             emoji:"💪", points:10},
-    {id:"cleaned",  label:"Cleaned a room without being asked",emoji:"🧹", points:10},
-    {id:"read30",   label:"Read a book for 30 minutes",       emoji:"📖", points:5 },
-    {id:"read60",   label:"Read a book for 1 hour",           emoji:"📚", points:10},
-    {id:"hwearly",  label:"Finished all homework early",      emoji:"⏰", points:5 },
-    {id:"hwperfect",label:"Finished homework with no mistakes",emoji:"✅", points:15},
-    {id:"schoolearly",label:"Got ready for school early",     emoji:"🎒", points:10},
-    {id:"writing",  label:"Practiced writing",                emoji:"✏️", points:10},
-    {id:"math",     label:"Practiced math",                   emoji:"🔢", points:10},
-    {id:"laundry",  label:"Put away laundry",                 emoji:"👕", points:10},
-    {id:"kind",     label:"Was kind to others",               emoji:"💛", points:10},
-    {id:"bedtime",  label:"Went to bed on time",              emoji:"😴", points:10},
+    {id:"dinner",    label:"Ate prepared dinner",               emoji:"🍽️", points:5 },
+    {id:"healthy",   label:"Ate extra healthy food",            emoji:"🥦", points:5 },
+    {id:"workout",   label:"Did a 30-min workout",              emoji:"💪", points:10},
+    {id:"cleaned",   label:"Cleaned a room without being asked",emoji:"🧹", points:10},
+    {id:"read30",    label:"Read a book for 30 minutes",        emoji:"📖", points:5 },
+    {id:"read60",    label:"Read a book for 1 hour",            emoji:"📚", points:10},
+    {id:"hwearly",   label:"Finished all homework early",       emoji:"⏰", points:5 },
+    {id:"hwperfect", label:"Finished homework with no mistakes",emoji:"✅", points:15},
+    {id:"schoolearly",label:"Got ready for school early",       emoji:"🎒", points:10},
+    {id:"writing",   label:"Practiced writing",                 emoji:"✏️", points:10},
+    {id:"math",      label:"Practiced math",                    emoji:"🔢", points:10},
+    {id:"laundry",   label:"Put away laundry",                  emoji:"👕", points:10},
+    {id:"kind",      label:"Was kind to others",                emoji:"💛", points:10},
+    {id:"bedtime",   label:"Went to bed on time",               emoji:"😴", points:10},
   ],
   bad:[
-    {id:"boogers",  label:"Wiped boogers on couch",           emoji:"🤧", points:-5 },
-    {id:"disresp",  label:"Acted disrespectfully",            emoji:"🙄", points:-10},
-    {id:"samequestion",label:"Asked same question after being told", emoji:"🙉", points:-10},
-    {id:"stole",    label:"Stole or took item after asked not to", emoji:"🤲", points:-10},
-    {id:"broke",    label:"Broke an expensive item",          emoji:"💥", points:-50},
-    {id:"bathroom", label:"Made a mess in the bathroom",      emoji:"🚽", points:-10},
-    {id:"marker",   label:"Marker on any furniture",          emoji:"🖊️", points:-10},
-    {id:"eating",   label:"Eating outside kitchen or dining room", emoji:"🍕", points:-20},
-    {id:"nocleanup",label:"Not cleaning up after an activity",emoji:"😤", points:-10},
-    {id:"tantrum",  label:"Threw a tantrum",                  emoji:"😭", points:-10},
-    {id:"lying",    label:"Was not honest",                   emoji:"🤥", points:-15},
-    {id:"fighting", label:"Hit or pushed someone",            emoji:"👊", points:-20},
-    {id:"screen",   label:"Too much screen time",             emoji:"📱", points:-5 },
+    {id:"boogers",   label:"Wiped boogers on couch",            emoji:"🤧", points:-5 },
+    {id:"disresp",   label:"Acted disrespectfully",             emoji:"🙄", points:-10},
+    {id:"samequestion",label:"Asked same question after being told",emoji:"🙉",points:-10},
+    {id:"stole",     label:"Stole or took item after asked not to",emoji:"🤲",points:-10},
+    {id:"broke",     label:"Broke an expensive item",           emoji:"💥", points:-50},
+    {id:"bathroom",  label:"Made a mess in the bathroom",       emoji:"🚽", points:-10},
+    {id:"marker",    label:"Marker on any furniture",           emoji:"🖊️", points:-10},
+    {id:"eating",    label:"Eating outside kitchen or dining room",emoji:"🍕",points:-20},
+    {id:"nocleanup", label:"Not cleaning up after an activity", emoji:"😤", points:-10},
+    {id:"tantrum",   label:"Threw a tantrum",                   emoji:"😭", points:-10},
+    {id:"lying",     label:"Was not honest",                    emoji:"🤥", points:-15},
+    {id:"fighting",  label:"Hit or pushed someone",             emoji:"👊", points:-20},
+    {id:"screen",    label:"Too much screen time",              emoji:"📱", points:-5 },
   ]
 };
 
@@ -160,18 +211,14 @@ const LEVELS=[
 ];
 
 const COLORS=[
-  {id:"purple", hex:"#9B7FD4"},
-  {id:"blue",   hex:"#5B9BD5"},
-  {id:"green",  hex:"#6DBF8F"},
-  {id:"orange", hex:"#E07B5A"},
-  {id:"pink",   hex:"#E07BA0"},
-  {id:"yellow", hex:"#D4A020"},
-  {id:"teal",   hex:"#4AABB8"},
-  {id:"red",    hex:"#D45B5B"},
+  {id:"purple",hex:"#9B7FD4"},{id:"blue",hex:"#5B9BD5"},{id:"green",hex:"#6DBF8F"},
+  {id:"orange",hex:"#E07B5A"},{id:"pink",hex:"#E07BA0"},{id:"yellow",hex:"#D4A020"},
+  {id:"teal",hex:"#4AABB8"},{id:"red",hex:"#D45B5B"},
 ];
 
 const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
 const DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const CENTS_PER_POINT=10; // default rate
 
 function getLevel(p){return[...LEVELS].reverse().find(l=>p>=l.min)||LEVELS[0];}
 function getNextLevel(p){return LEVELS.find(l=>l.min>p);}
@@ -179,52 +226,51 @@ function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").repl
 function stars(n){n=Math.max(0,Math.min(5,n));return"⭐".repeat(n)+"☆".repeat(5-n);}
 function initials(name){return name.split(" ").map(w=>w[0]).join("").toUpperCase().slice(0,2);}
 function getColor(child){return COLORS.find(c=>c.id===child.colorId)?.hex||COLORS[0].hex;}
+function toDollars(pts,rate){return((pts*(rate||CENTS_PER_POINT))/100).toFixed(2);}
+function nextFriday(){const d=new Date();const day=d.getDay();const diff=(5-day+7)%7||7;d.setDate(d.getDate()+diff);return d.toLocaleDateString("en-US",{month:"short",day:"numeric"});}
 
 let state={
-  children:[{id:1,name:"Margot",points:0,log:[],photo:null,colorId:"purple"}],
-  activeChild:1,
-  view:"home",
-  tab:"good",
-  navTab:"earn",
-  newName:"",
-  calYear:new Date().getFullYear(),
-  calMonth:new Date().getMonth(),
-  calSelected:null,
-  editingChild:null
+  children:[{id:1,name:"Margot",points:0,log:[],payouts:[],photo:null,colorId:"purple",centsPerPoint:10}],
+  activeChild:1,view:"home",tab:"good",navTab:"earn",
+  newName:"",calYear:new Date().getFullYear(),calMonth:new Date().getMonth(),
+  calSelected:null,editingChild:null
 };
 
 try{
-  const s=localStorage.getItem("sc4");
+  const s=localStorage.getItem("sc5");
   if(s){const p=JSON.parse(s);state.children=p.children;state.activeChild=p.activeChild;}
 }catch(e){}
 
+// Migrate old data — ensure payouts array exists
+state.children=state.children.map(c=>({centsPerPoint:CENTS_PER_POINT,...c,payouts:c.payouts||[]}));
+
 function save(){
-  try{localStorage.setItem("sc4",JSON.stringify({children:state.children,activeChild:state.activeChild}));}
+  try{localStorage.setItem("sc5",JSON.stringify({children:state.children,activeChild:state.activeChild}));}
   catch(e){showToast("Storage full — try removing a photo","bad");}
 }
 
-function avatarHTML(child,size="small"){
+// ── Avatar helpers ──
+function avatarHTML(child,size){
   const color=getColor(child);
   if(size==="large"){
-    if(child.photo) return`<img src="${child.photo}" class="avatar-large" alt="${esc(child.name)}">`;
+    if(child.photo)return`<img src="${child.photo}" class="avatar-large" alt="">`;
     return`<div class="avatar-large-initials" style="background:${color}">${initials(child.name)}</div>`;
   }
-  if(child.photo) return`<img src="${child.photo}" class="child-tab-avatar" alt="${esc(child.name)}">`;
+  if(child.photo)return`<img src="${child.photo}" class="child-tab-avatar" alt="">`;
   return`<div class="child-tab-initials" style="background:${color}">${initials(child.name)}</div>`;
 }
-
 function manageAvatarHTML(child){
   const color=getColor(child);
-  if(child.photo) return`<img src="${child.photo}" class="manage-avatar" alt="${esc(child.name)}">`;
+  if(child.photo)return`<img src="${child.photo}" class="manage-avatar" alt="">`;
   return`<div class="manage-avatar-initials" style="background:${color}">${initials(child.name)}</div>`;
 }
 
+// ── Main render ──
 function render(){
   const app=document.getElementById("app");
   const child=state.children.find(c=>c.id===state.activeChild);
   let h="";
 
-  // Header
   h+=`<div class="header"><div><div class="header-title">⭐ Star Chart</div><div class="header-sub">Good behavior tracker</div></div><button class="btn-manage ${state.view==="manage"?"active":""}" onclick="toggleManage()">${state.view==="manage"?"← Done":"⚙ Kids"}</button></div>`;
 
   if(state.view==="manage"){
@@ -232,52 +278,44 @@ function render(){
     state.children.forEach(c=>{
       const lv=getLevel(c.points);
       const isEditing=state.editingChild===c.id;
-      const color=getColor(c);
       h+=`<div class="manage-card">
         <div class="manage-card-top">
-          <div class="manage-card-left">
-            ${manageAvatarHTML(c)}
-            <div>
-              <div class="manage-name">${esc(c.name)}</div>
-              <div class="manage-sub">${c.points} pts · ${lv.emoji} ${lv.label}</div>
-            </div>
-          </div>
-          <div class="manage-actions">
-            <button class="btn-edit" onclick="toggleEditChild(${c.id})">${isEditing?"Done":"Edit"}</button>
-            ${state.children.length>1?`<button class="btn-remove" onclick="removeChild(${c.id})">Remove</button>`:""}
-          </div>
+          <div class="manage-card-left">${manageAvatarHTML(c)}<div><div class="manage-name">${esc(c.name)}</div><div class="manage-sub">${c.points} pts · ${lv.emoji} ${lv.label}</div></div></div>
+          <div class="manage-actions"><button class="btn-edit" onclick="toggleEditChild(${c.id})">${isEditing?"Done":"Edit"}</button>${state.children.length>1?`<button class="btn-remove" onclick="removeChild(${c.id})">Remove</button>`:""}</div>
         </div>`;
       if(isEditing){
         h+=`<div class="manage-card-edit">
-          <div class="edit-label">PICK A COLOR</div>
+          <div class="edit-label">Pick a color</div>
           <div class="color-swatches">`;
-        COLORS.forEach(col=>{
-          h+=`<div class="color-swatch ${c.colorId===col.id?"selected":""}" style="background:${col.hex}" onclick="setColor(${c.id},'${col.id}')"></div>`;
-        });
+        COLORS.forEach(col=>{h+=`<div class="color-swatch ${c.colorId===col.id?"selected":""}" style="background:${col.hex}" onclick="setColor(${c.id},'${col.id}')"></div>`;});
         h+=`</div>
-          <div class="edit-label">PROFILE PHOTO</div>
+          <div class="edit-label">Profile photo</div>
           <label class="photo-upload-btn" for="photo-${c.id}">📷 Choose a photo from camera roll</label>
           <input type="file" id="photo-${c.id}" accept="image/*" style="display:none" onchange="handlePhoto(event,${c.id})">`;
-        if(c.photo){
-          h+=`<div class="photo-preview"><img src="${c.photo}" alt="preview"><button class="btn-remove-photo" onclick="removePhoto(${c.id})">Remove photo</button></div>`;
-        }
+        if(c.photo)h+=`<div class="photo-preview"><img src="${c.photo}" alt=""><button class="btn-remove-photo" onclick="removePhoto(${c.id})">Remove photo</button></div>`;
+        h+=`<div class="rate-card" style="margin-top:12px">
+          <div class="edit-label">Allowance rate</div>
+          <div class="rate-row">
+            <input class="rate-input" type="number" min="1" max="100" value="${c.centsPerPoint||10}" onchange="setRate(${c.id},this.value)"> ¢ per point
+          </div>
+        </div>`;
         h+=`</div>`;
       }
       h+=`</div>`;
     });
     h+=`<div class="add-child-card"><div class="add-child-title">Add a child</div><div class="add-row"><input class="add-input" id="nin" type="text" placeholder="Child's name" value="${esc(state.newName)}" oninput="state.newName=this.value" onkeydown="if(event.key==='Enter')addChild()"><button class="btn-add" onclick="addChild()">Add</button></div></div>`;
-    h+=`<button class="export-btn" onclick="exportData()">📤 Export data as text</button>`;
-    h+=`</div>`;
+    h+=`<button class="export-btn" onclick="exportData()">📤 Export data as text</button></div>`;
 
   } else if(child){
     const color=getColor(child);
+    const rate=child.centsPerPoint||CENTS_PER_POINT;
 
-    // Child selector tabs
+    // Child tabs
     if(state.children.length>1){
       h+=`<div class="child-tabs">`;
       state.children.forEach(c=>{
         const cc=getColor(c);
-        h+=`<button class="child-tab ${c.id===state.activeChild?"active":""}" style="${c.id===state.activeChild?`background:${cc};border-color:${cc};`:`border-color:${cc}22;`}" onclick="setChild(${c.id})">${avatarHTML(c,"small")}${esc(c.name)}</button>`;
+        h+=`<button class="child-tab ${c.id===state.activeChild?"active":""}" style="${c.id===state.activeChild?`background:${cc};border-color:${cc};`:""}" onclick="setChild(${c.id})">${avatarHTML(c,"small")}${esc(c.name)}</button>`;
       });
       h+=`</div>`;
     }
@@ -287,39 +325,25 @@ function render(){
     const nx=getNextLevel(child.points);
     const pct=nx?((child.points-lv.min)/(nx.min-lv.min))*100:100;
     const plabel=nx?`${child.points-lv.min}/${nx.min-lv.min} pts to ${nx.emoji} ${nx.label}`:"Max level! 👑";
-    h+=`<div class="score-card" style="background:#fff;">
+    h+=`<div class="score-card">
       <div class="score-top">
-        <div class="score-left">
-          ${avatarHTML(child,"large")}
-          <div>
-            <div class="child-name">${esc(child.name)}</div>
-            <div class="level-badge" style="background:${lv.color}22;color:${lv.color}">${lv.emoji} ${lv.label}</div>
-          </div>
-        </div>
-        <div>
-          <div class="score-num">${child.points}</div>
-          <div class="score-label">points</div>
-        </div>
+        <div class="score-left">${avatarHTML(child,"large")}<div><div class="child-name">${esc(child.name)}</div><div class="level-badge" style="background:${lv.color}22;color:${lv.color}">${lv.emoji} ${lv.label}</div></div></div>
+        <div><div class="score-num">${child.points}</div><div class="score-label">points</div><div class="score-allowance">= $${toDollars(child.points,rate)}</div></div>
       </div>
-      <div class="progress-bar-wrap">
-        <div class="progress-info"><span>${plabel}</span><span>${stars(Math.round(pct/20))}</span></div>
-        <div class="progress-track"><div class="progress-fill" style="width:${Math.min(100,pct)}%;background:${color}"></div></div>
-      </div>
+      <div class="progress-bar-wrap"><div class="progress-info"><span>${plabel}</span><span>${stars(Math.round(pct/20))}</span></div><div class="progress-track"><div class="progress-fill" style="width:${Math.min(100,pct)}%;background:${color}"></div></div></div>
     </div>`;
 
-    // Nav tabs
+    // Nav tabs — 4 tabs now
     h+=`<div class="nav-wrap"><div class="nav-toggle">
       <button class="nav-btn ${state.navTab==="earn"?"active":""}" onclick="setNavTab('earn')">🌟 Award</button>
       <button class="nav-btn ${state.navTab==="log"?"active":""}" onclick="setNavTab('log')">📋 History</button>
-      <button class="nav-btn ${state.navTab==="calendar"?"active":""}" onclick="setNavTab('calendar')">📅 Calendar</button>
+      <button class="nav-btn ${state.navTab==="allowance"?"active":""}" onclick="setNavTab('allowance')">💰 Allowance</button>
+      <button class="nav-btn ${state.navTab==="calendar"?"active":""}" onclick="setNavTab('calendar')">📅 Cal</button>
     </div></div>`;
 
-    // EARN tab
+    // EARN
     if(state.navTab==="earn"){
-      h+=`<div class="sub-toggle"><div class="nav-toggle">
-        <button class="nav-btn ${state.tab==="good"?"active":""}" onclick="setTab('good')">✅ Earn Points</button>
-        <button class="nav-btn ${state.tab==="bad"?"active":""}" onclick="setTab('bad')">❌ Remove Points</button>
-      </div></div>`;
+      h+=`<div class="sub-toggle"><div class="nav-toggle"><button class="nav-btn ${state.tab==="good"?"active":""}" onclick="setTab('good')">✅ Earn Points</button><button class="nav-btn ${state.tab==="bad"?"active":""}" onclick="setTab('bad')">❌ Remove Points</button></div></div>`;
       h+=`<div class="behaviors">`;
       BEHAVIORS[state.tab].forEach(b=>{
         const bad=b.points<0;
@@ -328,21 +352,37 @@ function render(){
       h+=`</div>`;
     }
 
-    // HISTORY tab
+    // HISTORY — with undo + edit
     if(state.navTab==="log"){
       h+=`<div class="log-section">`;
       if(!child.log.length){
         h+=`<div class="log-empty">No events yet. Start tracking!</div>`;
       } else {
-        child.log.forEach(e=>{
-          const col=e.points>0?"#2E8A55":"#D94F4F";
-          h+=`<div class="log-entry"><div><div class="log-entry-label">${esc(e.label)}</div><div class="log-entry-ts">${esc(e.ts)}</div></div><div class="log-entry-pts" style="color:${col}">${e.points>0?"+":""}${e.points}</div></div>`;
+        child.log.forEach((e,i)=>{
+          if(e.isPayout){
+            h+=`<div class="log-entry-payout"><div style="display:flex;justify-content:space-between;align-items:center"><div><div class="log-entry-payout-title">💰 Allowance paid out — $${e.dollars}</div><div class="log-entry-payout-sub">${e.pts} pts · ${esc(e.ts)}</div></div></div></div>`;
+          } else {
+            const col=e.points>0?"#2E8A55":"#D94F4F";
+            h+=`<div class="log-entry">
+              <div style="flex:1;min-width:0">
+                <div class="log-entry-label">${esc(e.label)}</div>
+                <div class="log-entry-ts">${esc(e.ts)}</div>
+              </div>
+              <div class="log-entry-pts" style="color:${col}">${e.points>0?"+":""}${e.points}</div>
+              <button class="btn-undo" onclick="openEditModal(${i})">✏️ Edit</button>
+            </div>`;
+          }
         });
       }
       h+=`</div>`;
     }
 
-    // CALENDAR tab
+    // ALLOWANCE
+    if(state.navTab==="allowance"){
+      h+=renderAllowance(child,color,rate);
+    }
+
+    // CALENDAR
     if(state.navTab==="calendar"){
       h+=renderCalendar(child,color);
     }
@@ -351,13 +391,59 @@ function render(){
   app.innerHTML=h;
 }
 
+function renderAllowance(child,color,rate){
+  const totalPaidOut=child.payouts.reduce((s,p)=>s+p.dollars,0);
+  const daysUntilFriday=(()=>{const d=new Date();const diff=(5-d.getDay()+7)%7;return diff===0?"Today is Friday! 🎉":`${diff} day${diff===1?"":"s"} until Friday`;})();
+
+  let h=`<div class="allowance-section">`;
+
+  // Friday banner
+  h+=`<div class="friday-note">📅 ${daysUntilFriday} — next payout: ${nextFriday()}</div>`;
+
+  // Current balance card
+  h+=`<div class="allowance-card">
+    <div class="allowance-title">💵 This Week's Balance</div>
+    <div class="allowance-row"><span class="allowance-row-label">Points earned</span><span class="allowance-row-value">${child.points} pts</span></div>
+    <div class="allowance-row"><span class="allowance-row-label">Rate</span><span class="allowance-row-value">${rate}¢ per point</span></div>
+    <div class="allowance-row"><span class="allowance-row-label">Allowance earned</span><span class="allowance-row-value green">$${toDollars(child.points,rate)}</span></div>
+    <button class="payout-btn" onclick="openPayoutModal()" ${child.points===0?"disabled":""}>
+      ${child.points===0?"No points to pay out yet":"💸 Pay Out $"+toDollars(child.points,rate)+" Now"}
+    </button>
+    <div class="rate-note">Rate: ${rate}¢ per point · Change in ⚙ Kids → Edit</div>
+  </div>`;
+
+  // Total paid out
+  if(child.payouts.length>0){
+    h+=`<div class="payout-total-card"><div><div class="payout-total-label">Total paid out, all time</div></div><div class="payout-total-value">$${totalPaidOut.toFixed(2)}</div></div>`;
+
+    h+=`<div class="payout-history-title">Payout history</div>`;
+    [...child.payouts].reverse().forEach(p=>{
+      h+=`<div class="payout-record">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><div class="payout-record-date">${esc(p.date)}</div><div class="payout-record-detail">${p.pts} pts × ${p.rate}¢ per point</div></div>
+          <div class="payout-record-amount">$${p.dollars.toFixed(2)}</div>
+        </div>
+      </div>`;
+    });
+  }
+
+  h+=`</div>`;
+  return h;
+}
+
 function renderCalendar(child,color){
   const year=state.calYear,month=state.calMonth;
   const firstDay=new Date(year,month,1).getDay();
   const daysInMonth=new Date(year,month+1,0).getDate();
   const today=new Date();
   const dayMap={},dayEntries={};
+
+  // Mark payout days
+  const payoutDays=new Set();
+  child.payouts.forEach(p=>{const d=new Date(p.date);if(d.getFullYear()===year&&d.getMonth()===month)payoutDays.add(d.getDate());});
+
   child.log.forEach(e=>{
+    if(e.isPayout)return;
     const d=new Date(e.ts);
     if(d.getFullYear()===year&&d.getMonth()===month){
       const k=d.getDate();
@@ -366,19 +452,10 @@ function renderCalendar(child,color){
       dayEntries[k].push(e);
     }
   });
-  function dayBg(pts){
-    if(pts===undefined)return"#F7F3EE";
-    if(pts>20)return"#6DBF8F";
-    if(pts>0)return"#B8E8CC";
-    if(pts===0)return"#F7F3EE";
-    return"#FFD0C8";
-  }
-  function dayTxt(pts){
-    if(pts===undefined)return"#3A2F6E";
-    if(pts>0)return"#1A6B3A";
-    if(pts<0)return"#B03020";
-    return"#3A2F6E";
-  }
+
+  function dayBg(pts){if(pts===undefined)return"#F7F3EE";if(pts>20)return"#6DBF8F";if(pts>0)return"#B8E8CC";if(pts===0)return"#F7F3EE";return"#FFD0C8";}
+  function dayTxt(pts){if(pts===undefined)return"#3A2F6E";if(pts>0)return"#1A6B3A";if(pts<0)return"#B03020";return"#3A2F6E";}
+
   let h=`<div class="cal-section">`;
   h+=`<div class="cal-header"><button class="cal-nav-btn" onclick="calPrev()">‹</button><span class="cal-month">${MONTHS[month]} ${year}</span><button class="cal-nav-btn" onclick="calNext()">›</button></div>`;
   h+=`<div class="cal-grid"><div class="cal-dow">`;
@@ -389,10 +466,11 @@ function renderCalendar(child,color){
     const pts=dayMap[d];
     const isToday=today.getFullYear()===year&&today.getMonth()===month&&today.getDate()===d;
     const isSel=state.calSelected===d;
+    const isPayout=payoutDays.has(d);
     const bg=isSel?color:dayBg(pts);
     const numCol=isSel?"#fff":dayTxt(pts);
     const ptsCol=isSel?"rgba(255,255,255,0.85)":(pts>0?"#2E8A55":"#D94F4F");
-    h+=`<div class="cal-day ${isToday?"today":""}" style="background:${bg}" onclick="selectDay(${d})">
+    h+=`<div class="cal-day ${isToday?"today":""} ${isPayout?"payout-day":""}" style="background:${bg}" onclick="selectDay(${d})">
       <span class="cal-day-num" style="color:${numCol}">${d}</span>
       ${pts!==undefined?`<span class="cal-day-pts" style="color:${ptsCol}">${pts>0?"+":""}${pts}</span>`:""}
     </div>`;
@@ -401,16 +479,18 @@ function renderCalendar(child,color){
     <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#6DBF8F"></div>Great (20+)</div>
     <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#B8E8CC"></div>Good</div>
     <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#FFD0C8"></div>Points lost</div>
+    <div class="cal-legend-item">💰 = payout day</div>
   </div></div>`;
+
   if(state.calSelected){
     const sel=state.calSelected;
     const entries=dayEntries[sel]||[];
     const selDate=new Date(year,month,sel);
     const dateStr=selDate.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
     h+=`<div class="cal-selected-day"><div class="cal-selected-title">${dateStr}</div>`;
-    if(!entries.length){
-      h+=`<div class="cal-no-activity">No activity recorded</div>`;
-    } else {
+    if(payoutDays.has(sel))h+=`<div style="font-size:13px;font-weight:700;color:#B8860B;margin-bottom:6px">💰 Allowance paid out this day</div>`;
+    if(!entries.length){h+=`<div class="cal-no-activity">No activity recorded</div>`;}
+    else{
       entries.forEach(e=>{
         const col=e.points>0?"#2E8A55":"#D94F4F";
         h+=`<div class="cal-selected-entry"><span style="font-size:13px;font-weight:700;color:#3A2F6E">${esc(e.label)}</span><span style="font-size:13px;font-weight:900;color:${col}">${e.points>0?"+":""}${e.points}</span></div>`;
@@ -425,8 +505,102 @@ function renderCalendar(child,color){
   return h;
 }
 
-// Actions
-function showToast(msg,type){const ex=document.querySelector(".toast");if(ex)ex.remove();const t=document.createElement("div");t.className="toast";t.style.background=type==="good"?"#6DBF8F":"#E07B5A";t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2200);}
+// ── Modals ──
+function openPayoutModal(){
+  const child=state.children.find(c=>c.id===state.activeChild);
+  const rate=child.centsPerPoint||CENTS_PER_POINT;
+  const dollars=parseFloat(toDollars(child.points,rate));
+  const m=document.getElementById("modal");
+  m.innerHTML=`<div class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal">
+      <div class="modal-title">💰 Pay Out Allowance</div>
+      <div class="modal-sub">This will reset ${esc(child.name)}'s points to 0</div>
+      <div class="modal-amount">$${dollars.toFixed(2)}</div>
+      <div class="modal-detail">${child.points} pts × ${rate}¢ per point</div>
+      <div class="modal-btn-row">
+        <button class="modal-cancel" onclick="closeModalDirect()">Cancel</button>
+        <button class="modal-confirm" onclick="confirmPayout()">Confirm Payout ✓</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function confirmPayout(){
+  const child=state.children.find(c=>c.id===state.activeChild);
+  const rate=child.centsPerPoint||CENTS_PER_POINT;
+  const dollars=parseFloat(toDollars(child.points,rate));
+  const pts=child.points;
+  const dateStr=new Date().toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+  state.children=state.children.map(c=>{
+    if(c.id!==state.activeChild)return c;
+    return{
+      ...c,
+      points:0,
+      payouts:[...c.payouts,{date:dateStr,pts,dollars,rate}],
+      log:[{isPayout:true,dollars:dollars.toFixed(2),pts,ts:new Date().toLocaleString()},...c.log]
+    };
+  });
+  save();
+  closeModalDirect();
+  showToast(`💰 $${dollars.toFixed(2)} paid to ${child.name}!`,"good");
+  render();
+}
+
+function openEditModal(idx){
+  const child=state.children.find(c=>c.id===state.activeChild);
+  const e=child.log[idx];
+  if(!e||e.isPayout)return;
+  const m=document.getElementById("modal");
+  m.innerHTML=`<div class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal">
+      <div class="modal-title">✏️ Edit Entry</div>
+      <div class="modal-sub">${esc(e.label)} · ${esc(e.ts)}</div>
+      <div style="margin:16px 0">
+        <div class="edit-label" style="margin-bottom:8px">Adjust point value</div>
+        <input class="edit-modal-input" id="editPts" type="number" value="${e.points}" placeholder="e.g. 10 or -10">
+        <div style="font-size:12px;color:#9B8EC4;font-weight:600;margin-bottom:16px">Use negative numbers to remove points (e.g. -10)</div>
+      </div>
+      <div class="modal-btn-row">
+        <button class="modal-cancel" style="background:#FFE4E4;color:#D94F4F" onclick="deleteEntry(${idx})">🗑 Delete</button>
+        <button class="modal-cancel" onclick="closeModalDirect()">Cancel</button>
+        <button class="modal-confirm" onclick="saveEdit(${idx})">Save</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function saveEdit(idx){
+  const newPts=parseInt(document.getElementById("editPts").value);
+  if(isNaN(newPts)){showToast("Enter a valid number","bad");return;}
+  state.children=state.children.map(c=>{
+    if(c.id!==state.activeChild)return c;
+    const oldPts=c.log[idx].points;
+    const diff=newPts-oldPts;
+    const newLog=[...c.log];
+    newLog[idx]={...newLog[idx],points:newPts};
+    return{...c,points:Math.max(0,c.points+diff),log:newLog};
+  });
+  save();closeModalDirect();
+  showToast("Entry updated","good");render();
+}
+
+function deleteEntry(idx){
+  if(!confirm("Delete this entry? Points will be reversed."))return;
+  state.children=state.children.map(c=>{
+    if(c.id!==state.activeChild)return c;
+    const pts=c.log[idx].points;
+    const newLog=c.log.filter((_,i)=>i!==idx);
+    return{...c,points:Math.max(0,c.points-pts),log:newLog};
+  });
+  save();closeModalDirect();
+  showToast("Entry deleted","bad");render();
+}
+
+function closeModal(e){if(e.target===e.currentTarget)closeModalDirect();}
+function closeModalDirect(){document.getElementById("modal").innerHTML="";}
+
+// ── Actions ──
+function showToast(msg,type){const ex=document.querySelector(".toast");if(ex)ex.remove();const t=document.createElement("div");t.className="toast";t.style.background=type==="good"?"#6DBF8F":"#E07B5A";t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2500);}
 function toggleManage(){state.view=state.view==="manage"?"home":"manage";state.editingChild=null;render();}
 function setChild(id){state.activeChild=id;state.calSelected=null;render();}
 function setTab(t){state.tab=t;render();}
@@ -435,22 +609,17 @@ function calPrev(){state.calMonth--;if(state.calMonth<0){state.calMonth=11;state
 function calNext(){state.calMonth++;if(state.calMonth>11){state.calMonth=0;state.calYear++;}state.calSelected=null;render();}
 function selectDay(d){state.calSelected=state.calSelected===d?null:d;render();}
 function toggleEditChild(id){state.editingChild=state.editingChild===id?null:id;render();}
-
-function setColor(childId,colorId){
-  state.children=state.children.map(c=>c.id===childId?{...c,colorId}:c);
-  save();render();
-}
+function setColor(childId,colorId){state.children=state.children.map(c=>c.id===childId?{...c,colorId}:c);save();render();}
+function setRate(childId,val){const r=Math.max(1,Math.min(100,parseInt(val)||10));state.children=state.children.map(c=>c.id===childId?{...c,centsPerPoint:r}:c);save();render();}
 
 function handlePhoto(event,childId){
-  const file=event.target.files[0];
-  if(!file)return;
+  const file=event.target.files[0];if(!file)return;
   const reader=new FileReader();
   reader.onload=function(e){
     const img=new Image();
     img.onload=function(){
       const canvas=document.createElement("canvas");
-      const MAX=300;
-      let w=img.width,h=img.height;
+      const MAX=300;let w=img.width,h=img.height;
       if(w>h){if(w>MAX){h=h*(MAX/w);w=MAX;}}else{if(h>MAX){w=w*(MAX/h);h=MAX;}}
       canvas.width=w;canvas.height=h;
       canvas.getContext("2d").drawImage(img,0,0,w,h);
@@ -462,11 +631,7 @@ function handlePhoto(event,childId){
   };
   reader.readAsDataURL(file);
 }
-
-function removePhoto(childId){
-  state.children=state.children.map(c=>c.id===childId?{...c,photo:null}:c);
-  save();render();
-}
+function removePhoto(childId){state.children=state.children.map(c=>c.id===childId?{...c,photo:null}:c);save();render();}
 
 function award(pts,label){
   state.children=state.children.map(c=>{
@@ -479,11 +644,10 @@ function award(pts,label){
 }
 
 function addChild(){
-  const name=state.newName.trim();
-  if(!name)return;
+  const name=state.newName.trim();if(!name)return;
   const id=Date.now();
   const colorId=COLORS[state.children.length%COLORS.length].id;
-  state.children=[...state.children,{id,name,points:0,log:[],photo:null,colorId}];
+  state.children=[...state.children,{id,name,points:0,log:[],payouts:[],photo:null,colorId,centsPerPoint:CENTS_PER_POINT}];
   state.activeChild=id;state.newName="";state.view="home";
   save();render();
 }
@@ -499,9 +663,17 @@ function exportData(){
   let out="⭐ STAR CHART EXPORT\n";
   out+=`Exported: ${new Date().toLocaleString()}\n\n`;
   state.children.forEach(c=>{
-    out+=`═══════════════════\n${c.name} — ${c.points} pts (${getLevel(c.points).label})\n═══════════════════\n`;
+    const rate=c.centsPerPoint||CENTS_PER_POINT;
+    out+=`═══════════════════\n${c.name} — ${c.points} pts (${getLevel(c.points).label}) = $${toDollars(c.points,rate)}\n═══════════════════\n`;
+    out+=`PAYOUT HISTORY:\n`;
+    if(!c.payouts.length){out+="No payouts yet.\n";}
+    else{c.payouts.forEach(p=>{out+=`  ${p.date}: ${p.pts} pts → $${p.dollars.toFixed(2)}\n`;});}
+    out+=`\nACTIVITY LOG:\n`;
     if(!c.log.length){out+="No events recorded.\n";}
-    else{c.log.forEach(e=>{out+=`${e.ts}  ${e.label}  ${e.points>0?"+":""}${e.points}\n`;});}
+    else{c.log.forEach(e=>{
+      if(e.isPayout){out+=`${e.ts}  💰 PAYOUT  $${e.dollars}\n`;}
+      else{out+=`${e.ts}  ${e.label}  ${e.points>0?"+":""}${e.points}\n`;}
+    });}
     out+="\n";
   });
   const blob=new Blob([out],{type:"text/plain"});
